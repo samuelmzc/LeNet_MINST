@@ -25,29 +25,6 @@ train_set, test_set = load_process_data(size = SIZE_IMG, num_classes = n_classes
 train_loader = torch.utils.data.DataLoader(train_set, batch_size = BATCH_SIZE, shuffle = True)
 test_loader = torch.utils.data.DataLoader(test_set, batch_size = BATCH_SIZE, shuffle = True)
 
-# Predicting image
-im = Image.open("images/test.jpeg").convert("L")
-im2 = Image.open("images/tes2.jpeg").convert("L")
-im = ImageOps.invert(im)
-im2 = ImageOps.invert(im2)
-
-data_transformations = tv.transforms.Compose([
-        tv.transforms.Resize((SIZE_IMG, SIZE_IMG)),                # Resize image
-        tv.transforms.ToTensor(),                        # Converts to torch tensor and normalize to [0, 1]
-        tv.transforms.Lambda(lambda img : (img * 2) - 1) # From [0, 1] to [-1, 1]
-    ])
-
-tensortest1 = data_transformations(im)
-tensortest2 = data_transformations(im2)
-
-try_loader = torch.utils.data.DataLoader([tensortest1, tensortest2])
-
-tensor_im_test = next(iter(try_loader))
-
-print(tensor_im_test[0])
-
-
-
 # Predicting labels
 tensors, targets = next(iter(test_loader))
 predictions = CONVnet.forward(tensors)
