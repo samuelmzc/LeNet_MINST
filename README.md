@@ -8,11 +8,11 @@ Implementation of a LeNet for Handwritten classification tasks using the MNIST d
 
 The MNIST dataset consist on $$\approx 1000$$ images of handwritten digits from 0 to 9 in gray scale. For more information, [click here](https://yann.lecun.com/exdb/mnist/). 
 
-The advantage of the *CNN* over the *MLP* is the ability to recognize patterns in the input image as the networks gets deeper due to the convolutional layers, which generally are formed by a convolution and a max pooling. The number of channels increases and the 2D dimensions decrease along the network, which final output is flattened and connected to *fully connected layers*, i.e. a MLP with SoftMax output.
+The advantage of the *CNN* over the *MLP* is the ability to recognize patterns in the input image as the networks gets deeper due to the convolutional layers, which generally are formed by a convolution and a max pooling. The number of channels increase and the 2D dimensions decrease along the network, which final output is flattened and connected to *fully connected layers*, i.e. a MLP with SoftMax output.
 
 The Le-Net is one of the first arquitectures of machine learning using convolutional layers. Proposed by the French-American computer scientist Yann LeCun to read handwritten zip codes. [*LeCun, Y.; Boser, B.; Denker, J. S.; Henderson, D.; Howard, R. E.; Hubbard, W. & Jackel, L. D. (1989). Backpropagation applied to handwritten zip code recognition. Neural Computation*]
 
-The model archieves an accuracy of 99% both for training and test set with 10 epochs. For intuition purposes, the model was also trained for 1 epoch, archieving a result of 99% for training set and 98% for test set. The models were saved in the *model* folder. Also, figures for both 1 and 10 epochs models costs are available at the *figures* folder.
+The model archieves an accuracy of 99% both for training and test sets with 10 epochs. For intuition purposes, the model was also trained for 1 epoch, archieving a result of 99% for training set and 98% for test set. The models were saved in the *model* folder. Also, figures for both 1 and 10 epochs models costs are available at the *figures* folder.
 
 A picture with 40 images out of a random batch of the test set with size 64 is found at the *images* folder. If the prediction is equal to the target, the predictions displays in color blue, else, it displays in red. 
 
