@@ -5,7 +5,7 @@ import torchvision as tv
 
 def load_process_data(size, num_classes):
     """
-    Loads thet training and test sets for CIFAR10 dataset
+    Loads thet training and test sets for MNIST dataset
 
     Arguments:
     size -- int, one dimentional size of the image, for resizing purposes
