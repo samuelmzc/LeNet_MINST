@@ -9,6 +9,7 @@ def load_process_data(size, num_classes):
 
     Arguments:
     size -- int, one dimentional size of the image, for resizing purposes
+    num_classes -- int, number of classes of the dataset
 
     Returns:
     train -- torch.dataset, splitted training set
