@@ -58,13 +58,19 @@ def tensor_to_PIL(tensor):
 
     image = reversed_transformations(tensor)
     return image
-
-
-def max_value(tensor):
-    return int((tensor == torch.max(tensor)).nonzero(as_tuple = True)[0])
-
+    
 
 def plot_loss(epochs, hist, hist_t, plot):
+    """
+    Plot the cost of the training and test set vs epochs
+
+    Arguments:
+    epochs -- int, number of epochs the model is trained
+    hist -- list, list with values of training cost for each epoch
+    hist_t -- list, list with value of test cost for each epoch
+    plot -- str, [Y,n] indicating if the user wants to show the plot
+    """
+    
     epocharr = np.linspace(1, epochs, epochs)
     plt.title("Cost for LeNet CNN | MNIST")
     plt.xlabel("Epochs")
@@ -83,21 +89,20 @@ def plot_loss(epochs, hist, hist_t, plot):
     else:
         pass
 
-def predicted_tensor(model, images):
-    pred = torch.nn.Softmax(dim = 1)(model.feed_forward(images))
-
-    for i in range(len(images)):
-        pred[i] = max_value(pred[i])
-    
-    return pred[:, 0].to(torch.int)
-
 
 def check_accuracy(model, loader):
+    """
+    Prints the accuracy of the model for certain data loader (train or test)
+
+    Arguments:
+    model -- class, LeNet model
+    loader -- torch.utils.data.DataLoader, train/test data loader
+    """
 
     accuracy = 0
     samples = 0
 
-    with torch.no_grad():
+    with torch.no_grad(): # 
         for i, (data, targets) in enumerate(loader):
             output = model.forward(data)
             _, prediction = output.max(1)
@@ -110,6 +115,16 @@ def check_accuracy(model, loader):
         print(f"Test set accuracy   : {accuracy/samples * 100 : .0f}%")
 
 def seconds_to_hhmmss(time):
+    """
+    Converts given amount of time (in seconds) and to an array [hours, minutes, seconds]
+
+    Arguments:
+    time -- float, time in seconds
+
+    Returns:
+    [hours, minutes, seconds] -- list, converted time to hours, minutes and seconds
+    """
+    
     hours = int(time/3600)
     minutes = int(time/60 - hours*60)
     seconds = int(time - hours*3600 - minutes*60)
