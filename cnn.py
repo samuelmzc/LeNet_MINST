@@ -2,6 +2,19 @@ import torch as torch
 from process_data import *
 
 class CNN(torch.nn.Module):
+    """
+    The Le-Net arquitecture consist in the following:
+
+    INPUT ==> 5X5 CONV2D X6 ==> 2X2 MAXPOOL STRIDE 2 ==> 5X5 CONV2D X16 ==> 2X2 MAXPOOL STRIDE 2 ==>
+    ==> FLATTEN ==> FC 5*5*16X120 ==> FC 120X64 ==> FC 64XCLASSES
+
+    As the torch's CrossEntropy loss takes as inputs the logits, don't apply SoftMax. After each 
+    convolution, a ReLU activation is applyed before the pooling. 
+
+    The operation 5*5*16 comes as the result of applying each convolution and pooling, leading to 
+    the total transformation: 32X32X1 ==> 5X5X16.
+    """
+
     def __init__(self, in_channels, classes):
         super(CNN, self).__init__()
         self.in_channels = in_channels
@@ -27,7 +40,7 @@ class CNN(torch.nn.Module):
         x = torch.flatten(x, 1) # flatten all except batch
         x = self.FC3(x)
         x = self.FC4(x)
-        x = self.FC5(x)
-        return x
+        logits = self.FC5(x)
+        return logits
 
 
